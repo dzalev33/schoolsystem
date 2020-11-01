@@ -6,8 +6,10 @@ class Boards extends  Controller {
     {
 
     }
+
     public function index()
     {
+        $this->view('boards/index');
 
     }
 
