@@ -1,6 +1,6 @@
 <?php
 
-class Pages extends  Controller {
+class Students extends  Controller {
 
     public function __construct()
     {
@@ -8,7 +8,6 @@ class Pages extends  Controller {
     }
     public function index()
     {
-        $this->view('pages/index');
 
     }
 
