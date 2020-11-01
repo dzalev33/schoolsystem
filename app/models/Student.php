@@ -1,43 +1,26 @@
 <?php
+class Student {
 
+    private $db;
 
-class Student extends Controller {
-
-
-
-//    get all students
-    public static function getAllStudents()
-    {
-        $sql = "SELECT
-			students.id,
-			students.`name`,
-			schoolsystem.`name` AS schoolsystem_name,
-			schoolsystem.type AS schoolsystem_type
-			FROM
-			students
-			INNER JOIN schoolsystem ON students.schoolsystem = schoolsystem.id
-			GROUP BY
-			students.id,
-			students.`name`,
-			schoolsystem.`name`,
-			schoolsystem.type";
-        $query = static::getConnection()->prepare($sql);
-        $query->execute();
-        return $query->fetchAll();
+    public function __construct(){
+        $this->db = new Database();
     }
 
+    public function getPosts(){
+        $this->db->query('SELECT *,
+                        student.id as studentId,
+                        users.id as userId,
+                        student.created_at as studentCreated,
+                        users.created_at as userCreated
+                        FROM posts
+                        INNER JOIN users
+                        ON student.user_id = users.id
+                        ORDER BY student.created_at DESC
+                        ');
 
-    public function getStudent(){
+        $results = $this->db->resultSet();
 
+        return $results;
     }
-
-    public function getStudentCMS(){
-
-    }
-    
-    public function getStudentCSMB(){
-
-    }
-
-
 }
